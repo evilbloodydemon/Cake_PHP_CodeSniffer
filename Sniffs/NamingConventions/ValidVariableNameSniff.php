@@ -30,6 +30,7 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractVariableSniff', true) === fa
  */
 class Cake_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff
 {
+    //todo implement camelBack checking
 
     /**
      * Tokens to ignore so that we can find a DOUBLE_COLON.
@@ -93,9 +94,6 @@ class Cake_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniff
                 if (strpos($objVarName, '_')) {
                     $error = "Variable \"$originalVarName\" is not in valid camel caps format";
                     $phpcsFile->addError($error, $var);
-                } else if (preg_match('|\d|', $objVarName)) {
-                    $warning = "Variable \"$originalVarName\" contains numbers but this is discouraged";
-                    $phpcsFile->addWarning($warning, $stackPtr);
                 }
             }
         }//end if
@@ -109,9 +107,6 @@ class Cake_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniff
         if (strpos($varName, '_')) {
             $error = "Variable \"$originalVarName\" is not in valid camel caps format";
             $phpcsFile->addError($error, $stackPtr);
-        } else if (preg_match('|\d|', $varName)) {
-            $warning = "Variable \"$originalVarName\" contains numbers but this is discouraged";
-            $phpcsFile->addWarning($warning, $stackPtr);
         }
 
     }//end processVariable()
@@ -152,9 +147,6 @@ class Cake_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniff
         if (PHP_CodeSniffer::isCamelCaps($varName, false, $public, false) === false) {
             $error = "Variable \"$varName\" is not in valid camel caps format";
             $phpcsFile->addError($error, $stackPtr);
-        } else if (preg_match('|\d|', $varName)) {
-            $warning = "Variable \"$varName\" contains numbers but this is discouraged";
-            $phpcsFile->addWarning($warning, $stackPtr);
         }
 
     }//end processMemberVar()
@@ -206,9 +198,6 @@ class Cake_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniff
                     $varName = $matches[0];
                     $error   = "Variable \"$originalVarName\" is not in valid camel caps format";
                     $phpcsFile->addError($error, $stackPtr);
-                } else if (preg_match('|\d|', $varName)) {
-                    $warning = "Variable \"$originalVarName\" contains numbers but this is discouraged";
-                    $phpcsFile->addWarning($warning, $stackPtr);
                 }
             }
         }//end if

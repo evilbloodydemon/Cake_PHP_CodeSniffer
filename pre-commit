@@ -29,7 +29,7 @@
 #
 ################################################################################
 
-width=$(tput cols);
+width=80;
 
 if [ `git rev-parse --verify HEAD` ]; then
 	against='HEAD'
@@ -38,7 +38,7 @@ else
 fi
 commitFiles=`git diff-index --cached --name-only $against`
 
-args="-s --report-width=$width"
+args="-n -s --report-width=$width"
 
 phpFiles="";
 phpFilesCount=0;
@@ -46,7 +46,7 @@ for f in $commitFiles; do
 	if [[ ! -e $f ]]; then
 		continue;
 	fi
-	if [[ $f =~ \.(php|ctp)$ ]]; then
+	if [[ $f == *.php ]]; then
 		phpFilesCount=$phpFilesCount+1
 		phpFiles="$phpFiles $f"
 	fi
