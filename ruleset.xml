@@ -4,9 +4,14 @@
 
  <!-- Include some sniffs from all around the place -->
  <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+ <rule ref="Generic.PHP.NoSilencedErrors"/>
  <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
  <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+ <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
+ <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+ <rule ref="Generic.Metrics.CyclomaticComplexity"/>
  <rule ref="PEAR.Functions.ValidDefaultValue"/>
+ <rule ref="PEAR.ControlStructures.ControlSignature"/>
  <rule ref="PEAR.NamingConventions.ValidClassName"/>
  <rule ref="Squiz.Functions.GlobalFunction"/>
  <rule ref="Squiz.ControlStructures.InlineIfDeclaration"/>
@@ -26,11 +31,11 @@
   </properties>
  </rule>
 
- <!-- Number of TABS code should be indented, don't indent doc blocks -->
+ <!-- Number of spaces code should be indented, don't indent doc blocks -->
  <rule ref="Cake.WhiteSpace.ScopeIndent">
   <properties>
-   <property name="indent" value="1"/>
-   <property name="exact" value="1"/>
+   <property name="indent" value="4"/>
+   <property name="exact" value="0"/>
   </properties>
  </rule>
 
