@@ -64,7 +64,7 @@ class Cake_Sniffs_Functions_FunctionLineCountSniff implements PHP_CodeSniffer_Sn
         if ($tokens[$stackPtr]['code'] === T_FUNCTION) {
 
             $functionName = $phpcsFile->getDeclarationName($stackPtr);
-            $closingBracket = $tokens[$stackPtr]['scope_closer'];
+            $closingBracket = isset($tokens[$stackPtr]['scope_closer']) ? $tokens[$stackPtr]['scope_closer'] : null;
 
             if ($closingBracket === null) {
                 // Possible inline structure. Other tests will handle it.

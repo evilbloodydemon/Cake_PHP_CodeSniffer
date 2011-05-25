@@ -39,6 +39,7 @@ class Cake_Sniffs_Files_ModelsFileNameSniff implements PHP_CodeSniffer_Sniff
 
     $path = $phpcsFile->getFileName();
     if(!preg_match("/(models)/i", $path)) return;
+    if(preg_match("/(tests)/i", $path)) return;
 
     $tokens = $phpcsFile->getTokens();
     $classname = $tokens[$phpcsFile->findNext(T_STRING, $stackPtr)]['content'];

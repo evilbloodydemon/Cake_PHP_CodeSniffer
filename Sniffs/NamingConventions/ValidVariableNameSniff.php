@@ -135,17 +135,10 @@ class Cake_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniff
                 $phpcsFile->addError($error, $stackPtr);
                 return;
             }
-        } else {
-            if (substr($varName, 0, 1) !== '_') {
-                $scope = ucfirst($memberProps['scope']);
-                $error = "$scope member variable \"$varName\" must contain a leading underscore";
-                $phpcsFile->addError($error, $stackPtr);
-                return;
-            }
         }
 
-        if (PHP_CodeSniffer::isCamelCaps($varName, false, $public, false) === false) {
-            $error = "Variable \"$varName\" is not in valid camel caps format";
+        if ($this->isCamelBack($varName, $public) === false) {
+            $error = "Variable \"$varName\" is not in valid camelBack format.";
             $phpcsFile->addError($error, $stackPtr);
         }
 
@@ -194,9 +187,8 @@ class Cake_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniff
                     }
                 }
 
-                if (PHP_CodeSniffer::isCamelCaps($varName, false, true, false) === false) {
-                    $varName = $matches[0];
-                    $error   = "Variable \"$originalVarName\" is not in valid camel caps format";
+                if ($this->isCamelBack($varName) === false) {
+                    $error   = "Variable \"$originalVarName\" is not in valid camelBack format";
                     $phpcsFile->addError($error, $stackPtr);
                 }
             }
@@ -204,7 +196,15 @@ class Cake_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniff
 
     }//end processVariableInString()
 
+    protected function isCamelBack($varName) {
+        $uVarName = ucfirst($varName);
 
+        if($uVarName == $varName) {
+            return false; //first letter must be lowercased
+        }
+
+        return PHP_CodeSniffer::isCamelCaps($varName, false, true, false);
+    }
 }//end class
 
 ?>
