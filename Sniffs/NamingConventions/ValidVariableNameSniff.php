@@ -196,14 +196,10 @@ class Cake_Sniffs_NamingConventions_ValidVariableNameSniff extends PHP_CodeSniff
 
     }//end processVariableInString()
 
-    protected function isCamelBack($varName) {
-        $uVarName = ucfirst($varName);
+    protected function isCamelBack($var, $public = true) {
+        $regex = '/^[' . ($public ? '' : '_') . 'a-z]+[a-zA-Z0-9]*$/';
 
-        if($uVarName == $varName) {
-            return false; //first letter must be lowercased
-        }
-
-        return PHP_CodeSniffer::isCamelCaps($varName, false, true, false);
+        return preg_match($regex, $var);
     }
 }//end class
 
