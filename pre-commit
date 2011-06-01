@@ -46,6 +46,9 @@ for f in $commitFiles; do
 	if [[ ! -e $f ]]; then
 		continue;
 	fi
+	if [[ $f == */schema/* ]]; then
+	    continue;
+	fi
 	if [[ $f == *.php ]]; then
 		phpFilesCount=$phpFilesCount+1
 		phpFiles="$phpFiles $f"
